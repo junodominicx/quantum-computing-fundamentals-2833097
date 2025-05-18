@@ -1,10 +1,22 @@
 {
+  // You can specify a base image. If omitted, Codespaces uses a default.
+  // Using a common base like Ubuntu:
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+  // Define features to install, including a specific Python version
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.10.4" // This line sets the Python version
+    }
+  },
+
   "extensions": [
     "GitHub.github-vscode-theme",
     "ms-python.python" // Includes Jupyter extension
     // Additional Extensions Here
   ],
-  "onCreateCommand" : "[ -f requirements.txt ] && pip install -r requirements.txt; echo PS1='\"$ \"' >> ~/.bashrc", //Set Terminal Prompt to $
-}
 
-// DevContainer Reference: https://code.visualstudio.com/docs/remote/devcontainerjson-reference
+  "onCreateCommand": "[ -f requirements.txt ] && pip install -r requirements.txt; echo PS1='\"$ \"' >> ~/.bashrc" //Set Terminal Prompt to $
+
+  // DevContainer Reference: https://code.visualstudio.com/docs/remote/devcontainerjson-reference
+}
