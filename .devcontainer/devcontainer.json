@@ -1,22 +1,32 @@
 {
-  // You can specify a base image. If omitted, Codespaces uses a default.
-  // Using a common base like Ubuntu:
+  // Specifies the base operating system image. Ubuntu is a common choice.
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 
-  // Define features to install, including a specific Python version
+  // Installs features on top of the base image.
   "features": {
+    // This feature installs and configures a specific version of Python.
     "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.10.4" // This line sets the Python version
+      "version": "3.10.4" // Python 3.10.4 will be installed (64-bit by default in Codespaces)
     }
   },
 
+  // VS Code extensions to install in the Codespace.
   "extensions": [
     "GitHub.github-vscode-theme",
-    "ms-python.python" // Includes Jupyter extension
-    // Additional Extensions Here
+    "ms-python.python" // Essential Python support, includes Jupyter extension
+    // You can add other extensions here, e.g., "ms-toolsai.jupyter" if not bundled
   ],
 
-  "onCreateCommand": "[ -f requirements.txt ] && pip install -r requirements.txt; echo PS1='\"$ \"' >> ~/.bashrc" //Set Terminal Prompt to $
+  // Command to run after the container is created and features are installed.
+  // This will install packages listed in 'requirements.txt' using the Python 3.10.4 environment.
+  // It also sets a simpler bash prompt.
+  "onCreateCommand": "[ -f requirements.txt ] && python -m pip install --upgrade pip && python -m pip install -r requirements.txt; [ -f ~/.bashrc ] && echo 'PS1=\"$ \"' >> ~/.bashrc",
+
+  // Optional: Settings to apply to VS Code within the Codespace.
+  "settings": {
+    "python.defaultInterpreterPath": "/opt/python/3.10.4/bin/python" // Ensures VS Code uses the feature-installed Python
+    // If you use linters/formatters, configure them here too.
+  }
 
   // DevContainer Reference: https://code.visualstudio.com/docs/remote/devcontainerjson-reference
 }
